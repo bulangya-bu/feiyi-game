@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞檐拾光 · 非遗拼图长卷</title>
+    <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body class="page-shell page-home">
+
+<!-- ====== 画卷开卷动画层 ====== -->
+<div id="scroll-intro" class="scroll-intro" aria-label="点击展开画卷">
+    <div class="scroll-intro__scene">
+        <!-- 上卷轴 -->
+        <div class="scroll-intro__rod scroll-intro__rod--top">
+            <div class="scroll-intro__rod-end scroll-intro__rod-end--left"></div>
+            <div class="scroll-intro__rod-body"></div>
+            <div class="scroll-intro__rod-end scroll-intro__rod-end--right"></div>
+        </div>
+
+        <!-- 画卷纸面（展开区域） -->
+        <div class="scroll-intro__paper">
+            <div class="scroll-intro__paper-inner">
+                <p class="scroll-intro__hint">点击展卷</p>
+                <div class="scroll-intro__title-block">
+                    <span class="scroll-intro__label">非遗拾光</span>
+                    <h1 class="scroll-intro__title">飞檐拾光</h1>
+                    <p class="scroll-intro__subtitle">在碎片归位之间，重新看见手艺的光</p>
+                </div>
+                <div class="scroll-intro__seal">
+                    <span>拾</span>
+                    <span>光</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下卷轴 -->
+        <div class="scroll-intro__rod scroll-intro__rod--bottom">
+            <div class="scroll-intro__rod-end scroll-intro__rod-end--left"></div>
+            <div class="scroll-intro__rod-body"></div>
+            <div class="scroll-intro__rod-end scroll-intro__rod-end--right"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ====== 正文长卷（展卷后显示） ====== -->
+<div id="main-scroll" class="main-scroll" style="display:none;">
+
+    <!-- 上卷轴端木 -->
+    <div class="scroll-bar scroll-bar--top"></div>
+
+    <!-- 画心（卷身） -->
+    <div class="scroll-body">
+
+        <header class="site-header site-header--home">
+            <a class="site-brand" th:href="@{/}">
+                <span class="site-brand__mark">飞檐拾光</span>
+                <span class="site-brand__sub">非遗文化拼图</span>
+            </a>
+            <nav class="site-nav">
+                <a th:href="@{/levels}">图录</a>
+                <a href="#chapters">章目</a>
+            </nav>
+        </header>
+
+        <main class="scroll-content">
+
+            <!-- ── 卷首 ── -->
+            <section class="scroll-opening" data-reveal="hero">
+                <div class="scroll-opening__label">
+                    <span class="title-label">卷首</span>
+                </div>
+                <h1 class="scroll-opening__title">
+                    在碎片归位之间<br>重新看见手艺的光
+                </h1>
+                <p class="scroll-opening__lead">
+                    一款围绕非物质文化遗产打造的网页拼图。选一件传统手艺进入关卡，
+                    在限定时间内完成修复，再通过展陈了解它背后的工艺、礼制和生活。
+                </p>
+                <p class="scroll-opening__note">向下展卷 ↓</p>
+            </section>
+
+            <hr class="ink-divider">
+
+            <!-- ── 章节入口 ── -->
+            <section id="chapters" class="chapters">
+                <div class="chapters__head" data-reveal="soft">
+                    <span class="title-label">卷中 · 章目</span>
+                    <p class="chapters__intro">三类非遗题材，从建筑到画作到手工，每一章都是一段可游玩的文化展陈。</p>
+                </div>
+
+                <div class="chapters__grid">
+                    <a class="chapter-entry" th:href="@{/levels}" data-reveal="soft" style="--reveal-delay:100ms;">
+                        <div class="chapter-entry__seal">
+                            <span>壹</span>
+                        </div>
+                        <h2 class="chapter-entry__title">建筑</h2>
+                        <p class="chapter-entry__desc">戏楼、牌楼、鼓楼、木塔、土楼、古桥——把飞檐与藻井拼回原位。</p>
+                        <span class="chapter-entry__status">
+                            六座建筑已入卷
+                        </span>
+                        <span class="chapter-entry__action">入卷 →</span>
+                    </a>
+
+                    <a class="chapter-entry" th:href="@{/levels?chapter=painting}" data-reveal="soft" style="--reveal-delay:220ms;">
+                        <div class="chapter-entry__seal">
+                            <span>贰</span>
+                        </div>
+                        <h2 class="chapter-entry__title">画作</h2>
+                        <p class="chapter-entry__desc">传统绘画中的山水、花鸟与人物，用拼图的方式重新阅读一幅画。</p>
+                        <span class="chapter-entry__status">
+                            六幅画作已入卷
+                        </span>
+                        <span class="chapter-entry__action">入卷 →</span>
+                    </a>
+
+                    <a class="chapter-entry" th:href="@{/levels?chapter=craft}" data-reveal="soft" style="--reveal-delay:340ms;">
+                        <div class="chapter-entry__seal">
+                            <span>叁</span>
+                        </div>
+                        <h2 class="chapter-entry__title">手工</h2>
+                        <p class="chapter-entry__desc">剪纸、刺绣、陶瓷、漆器——每一件器物都是一道可以拼合的手艺谜题。</p>
+                        <span class="chapter-entry__status">
+                            六件手艺已入卷
+                        </span>
+                        <span class="chapter-entry__action">入卷 →</span>
+                    </a>
+                </div>
+            </section>
+
+            <hr class="ink-divider">
+
+            <!-- ── 玩法说明 ── -->
+            <section class="how-to-play" data-reveal="soft">
+                <span class="title-label">玩法</span>
+                <div class="how-to-play__steps">
+                    <div class="how-to-play__step">
+                        <span class="how-to-play__num">一</span>
+                        <p>选择一件非遗作品进入关卡</p>
+                    </div>
+                    <div class="how-to-play__step">
+                        <span class="how-to-play__num">二</span>
+                        <p>拖拽交换或点击两块拼图完成修复</p>
+                    </div>
+                    <div class="how-to-play__step">
+                        <span class="how-to-play__num">三</span>
+                        <p>在倒计时结束前拼好，解锁作品讲解</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="ink-divider">
+
+            <!-- ── 题跋 / 尾声 ── -->
+            <section class="colophon" data-reveal="soft">
+                <div class="colophon__text">
+                    <p>飞檐拾光是一份尝试，用拼图游戏的方式让非遗不只是知识条目，而是一场可以动手参与的文化展陈。</p>
+                    <p class="colophon__sign">
+                        二〇二五年 · 初版
+                    </p>
+                </div>
+                <div class="colophon__action">
+                    <a class="button button--primary" th:href="@{/levels}">启卷入场</a>
+                </div>
+                <div class="colophon__seal">
+                    <div class="seal-mark seal-mark--round">
+                        <span>拾</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- 下卷轴端木 -->
+    <div class="scroll-bar scroll-bar--bottom"></div>
+
+</div>
+
+<script th:src="@{/js/page-effects.js}"></script>
+<script th:src="@{/js/scroll-intro.js}"></script>
+</body>
+</html>
