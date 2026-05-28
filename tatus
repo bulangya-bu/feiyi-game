@@ -1,0 +1,52 @@
+[33mcommit 0e51f0978e34a3914af1a5df80a06360314efafd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: 2g <15531056+core-2g@user.noreply.gitee.com>
+Date:   Wed May 27 23:30:24 2026 +0800
+
+    feat: 完成三卷18关拼图游戏（建筑/画作/手工）
+
+.gitattributes
+.gitignore
+"docs/01-\351\241\271\347\233\256\351\234\200\346\261\202\345\210\206\346\236\220.md"
+"docs/02-\346\212\200\346\234\257\344\270\216\345\274\200\345\217\221\350\247\204\345\210\222.md"
+pom.xml
+src/main/java/com/example/feiyigame/FeiyiGameApplication.java
+src/main/java/com/example/feiyigame/config/JsonConfig.java
+src/main/java/com/example/feiyigame/controller/LevelApiController.java
+src/main/java/com/example/feiyigame/controller/PageController.java
+src/main/java/com/example/feiyigame/model/Level.java
+src/main/java/com/example/feiyigame/service/LevelService.java
+src/main/resources/application.properties
+src/main/resources/data/levels.json
+src/main/resources/static/css/base.css
+src/main/resources/static/css/game.css
+src/main/resources/static/css/index.css
+src/main/resources/static/css/levels.css
+src/main/resources/static/favicon.svg
+src/main/resources/static/images/backgrounds/heritage-garden.jpg
+src/main/resources/static/images/levels/bridge.svg
+src/main/resources/static/images/levels/craft-1.svg
+src/main/resources/static/images/levels/craft-2.svg
+src/main/resources/static/images/levels/craft-3.svg
+src/main/resources/static/images/levels/craft-4.svg
+src/main/resources/static/images/levels/craft-5.svg
+src/main/resources/static/images/levels/craft-6.svg
+src/main/resources/static/images/levels/drum-tower.svg
+src/main/resources/static/images/levels/pagoda.svg
+src/main/resources/static/images/levels/paifang.svg
+src/main/resources/static/images/levels/painting-1.svg
+src/main/resources/static/images/levels/painting-2.svg
+src/main/resources/static/images/levels/painting-3.svg
+src/main/resources/static/images/levels/painting-4.svg
+src/main/resources/static/images/levels/painting-5.svg
+src/main/resources/static/images/levels/painting-6.svg
+src/main/resources/static/images/levels/stage.svg
+src/main/resources/static/images/levels/tulou.svg
+src/main/resources/static/js/game-page.js
+src/main/resources/static/js/levels-page.js
+src/main/resources/static/js/page-effects.js
+src/main/resources/static/js/progress.js
+src/main/resources/static/js/scroll-intro.js
+src/main/resources/templates/game.html
+src/main/resources/templates/index.html
+src/main/resources/templates/levels.html
+src/test/java/com/example/feiyigame/FeiyiGameApplicationTests.java
