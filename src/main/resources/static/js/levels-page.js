@@ -142,8 +142,21 @@
         }
     }
 
+    function playCatalogSwitch() {
+        var catalog = document.querySelector(".catalog-list");
+        if (!catalog) return;
+
+        catalog.classList.remove("is-switching");
+        void catalog.offsetWidth;
+        catalog.classList.add("is-switching");
+        window.setTimeout(function () {
+            catalog.classList.remove("is-switching");
+        }, 420);
+    }
+
     function switchChapter(chapter) {
         activeChapter = chapter;
+        playCatalogSwitch();
         updateTabButtons();
         updateChapterHeader();
         var filtered = filterLevelsByChapter(chapter);

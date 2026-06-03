@@ -10,9 +10,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg);
+    background:
+        radial-gradient(circle at 50% 42%, rgba(250, 246, 238, 0.72), transparent 28%),
+        url("/images/backgrounds/heritage-garden.jpg") center / cover,
+        var(--bg);
     cursor: pointer;
     transition: opacity 600ms var(--ease-out);
+}
+
+.scroll-intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(244, 237, 224, 0.74), rgba(244, 237, 224, 0.86)),
+        radial-gradient(circle at 50% 50%, transparent 0 36%, rgba(44, 36, 25, 0.16));
 }
 
 .scroll-intro.is-leaving {
@@ -26,6 +38,8 @@
     align-items: center;
     width: min(480px, 85vw);
     user-select: none;
+    position: relative;
+    z-index: 1;
 }
 
 /* 卷轴杆 */
@@ -222,8 +236,36 @@
 
 /* ── 卷首主视觉 ── */
 .scroll-opening {
+    position: relative;
+    overflow: hidden;
     padding: 80px 0 64px;
     text-align: center;
+    min-height: min(680px, calc(100vh - 96px));
+    display: grid;
+    align-content: center;
+}
+
+.scroll-opening::before {
+    content: "";
+    position: absolute;
+    inset: 18px -44px;
+    z-index: -2;
+    background:
+        linear-gradient(180deg, rgba(250, 246, 238, 0.46), rgba(250, 246, 238, 0.9)),
+        url("/images/backgrounds/heritage-garden.jpg") center / cover;
+    opacity: 0.42;
+    filter: saturate(0.78) sepia(0.18);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.scroll-opening::after {
+    content: "";
+    position: absolute;
+    inset: 28px 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 50% 22%, rgba(250, 246, 238, 0.86), transparent 42%),
+        linear-gradient(90deg, rgba(250, 246, 238, 0.82), transparent 22%, transparent 78%, rgba(250, 246, 238, 0.82));
 }
 
 .scroll-opening__label {
@@ -238,6 +280,7 @@
     line-height: 1.25;
     letter-spacing: 0.06em;
     color: var(--ink);
+    text-shadow: 0 2px 18px rgba(250, 246, 238, 0.8);
 }
 
 .scroll-opening__lead {
@@ -253,6 +296,7 @@
     color: var(--ink-muted);
     font-size: 0.8rem;
     letter-spacing: 0.2em;
+    animation: scroll-note-float 2.8s ease-in-out infinite;
 }
 
 /* ── 章节入口 ── */
@@ -288,13 +332,31 @@
     border: 1px solid var(--line);
     background: var(--paper);
     transition:
+        transform 300ms var(--ease-smooth),
         border-color 300ms ease,
         box-shadow 300ms ease;
 }
 
 a.chapter-entry:hover {
+    transform: translateY(-4px);
     border-color: var(--line-strong);
     box-shadow: var(--shadow-soft);
+}
+
+.chapter-entry::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(135deg, rgba(139, 69, 19, 0.08), transparent 30%),
+        radial-gradient(circle at 50% 0%, rgba(192, 60, 42, 0.07), transparent 34%);
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+a.chapter-entry:hover::before {
+    opacity: 1;
 }
 
 .chapter-entry--upcoming {
@@ -316,6 +378,12 @@ a.chapter-entry:hover {
     font-size: 1.4rem;
     font-weight: 600;
     transform: rotate(-3deg);
+    transition: transform 320ms var(--ease-smooth), box-shadow 320ms ease;
+}
+
+a.chapter-entry:hover .chapter-entry__seal {
+    transform: rotate(-7deg) scale(1.04);
+    box-shadow: 0 8px 18px rgba(192, 60, 42, 0.14);
 }
 
 .chapter-entry__seal--muted {
@@ -396,6 +464,7 @@ a.chapter-entry:hover .chapter-entry__action {
     font-size: 1rem;
     color: var(--ink-soft);
     margin-bottom: 12px;
+    background: rgba(250, 246, 238, 0.58);
 }
 
 .how-to-play__step p {
@@ -437,6 +506,11 @@ a.chapter-entry:hover .chapter-entry__action {
     display: flex;
     justify-content: center;
     margin-top: 28px;
+}
+
+@keyframes scroll-note-float {
+    0%, 100% { transform: translateY(0); opacity: 0.62; }
+    50% { transform: translateY(6px); opacity: 1; }
 }
 
 /* ── 响应式 ── */

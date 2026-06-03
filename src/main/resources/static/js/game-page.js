@@ -12,6 +12,7 @@
     const featuresElement = document.getElementById("level-features");
     const cultureElement = document.getElementById("level-culture");
     const factElement = document.getElementById("level-fact");
+    const boardShellElement = document.getElementById("board-shell");
     const boardElement = document.getElementById("puzzle-board");
     const progressElement = document.getElementById("progress-count");
     const moveCountElement = document.getElementById("move-count");
@@ -134,6 +135,10 @@
         moveCount += 1;
         clearSelection();
         renderBoard();
+        boardElement.classList.remove("is-restoring");
+        void boardElement.offsetWidth;
+        boardElement.classList.add("is-restoring");
+        window.setTimeout(() => boardElement.classList.remove("is-restoring"), 280);
         checkCompletion();
     }
 
@@ -257,6 +262,7 @@
 
         gameLocked = true;
         stopTimer();
+        boardShellElement.classList.add("is-complete");
 
         const elapsedSeconds = level.timeLimitSeconds - remainingSeconds;
         const result = window.FeiyiProgress.markLevelCleared(level, remainingSeconds, elapsedSeconds);
@@ -275,6 +281,7 @@
         selectedSlot = null;
         moveCount = 0;
         gameLocked = false;
+        boardShellElement.classList.remove("is-complete");
 
         renderBoard();
         updateTimer();

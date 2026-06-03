@@ -82,8 +82,13 @@
 .board-shell {
     position: relative;
     border: 1px solid var(--line);
-    background: var(--bg-silk);
+    background:
+        linear-gradient(135deg, rgba(139, 69, 19, 0.12), transparent 42%),
+        var(--bg-silk);
     overflow: hidden;
+    box-shadow:
+        0 16px 30px rgba(44, 36, 25, 0.08),
+        inset 0 0 0 10px rgba(250, 246, 238, 0.2);
 }
 
 /* 画心内边距 — 像一幅被展开的画 */
@@ -101,13 +106,33 @@
     pointer-events: none;
 }
 
+.board-shell::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    z-index: 2;
+    pointer-events: none;
+    border: 1px solid rgba(139, 69, 19, 0.14);
+    box-shadow: inset 0 0 28px rgba(44, 36, 25, 0.06);
+}
+
+.board-shell.is-complete::after {
+    animation: board-complete-glow 900ms ease-out;
+}
+
 .puzzle-board {
     position: relative;
     display: grid;
     gap: 6px;
     aspect-ratio: 4 / 3;
     padding: 8px;
-    background: linear-gradient(160deg, var(--bg-silk), var(--bg-deep));
+    background:
+        radial-gradient(circle at 30% 20%, rgba(250, 246, 238, 0.48), transparent 32%),
+        linear-gradient(160deg, var(--bg-silk), var(--bg-deep));
+}
+
+.puzzle-board.is-restoring {
+    animation: board-restore-pulse 260ms ease-out;
 }
 
 .puzzle-tile {
@@ -119,7 +144,9 @@
     background-size: cover;
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(44, 36, 25, 0.1);
+    box-shadow:
+        0 1px 4px rgba(44, 36, 25, 0.1),
+        inset 0 0 0 1px rgba(250, 246, 238, 0.12);
     transition:
         transform 200ms var(--ease-smooth),
         box-shadow 200ms ease;
@@ -139,11 +166,26 @@
     background: rgba(44, 36, 25, 0.55);
     color: rgba(250, 246, 238, 0.85);
     font-size: 0.7rem;
+    transition: opacity 200ms ease;
+}
+
+.puzzle-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(250, 246, 238, 0.26), transparent 46%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
 }
 
 .puzzle-tile:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(44, 36, 25, 0.14);
+}
+
+.puzzle-tile:hover::before {
+    opacity: 1;
 }
 
 .puzzle-tile:active {
@@ -158,6 +200,7 @@
 
 .puzzle-tile.is-correct {
     filter: saturate(1.06) brightness(1.02);
+    animation: tile-correct-settle 340ms ease-out;
 }
 
 .puzzle-tile.is-dragging {
@@ -178,6 +221,7 @@
     padding: 16px;
     background: rgba(250, 246, 238, 0.92);
     backdrop-filter: blur(6px);
+    z-index: 5;
 }
 
 .reference-overlay[hidden] {
@@ -210,6 +254,9 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+    padding: 10px 12px;
+    border: 1px solid rgba(44, 36, 25, 0.08);
+    background: rgba(250, 246, 238, 0.5);
 }
 
 .desk-controls__left {
@@ -238,10 +285,13 @@
 /* ── 旁注栏 ── */
 .desk-notes {
     border: 1px solid var(--line);
-    background: var(--paper);
+    background:
+        linear-gradient(180deg, rgba(250, 246, 238, 0.88), rgba(250, 246, 238, 0.98)),
+        var(--paper);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    box-shadow: var(--shadow-card);
 }
 
 .desk-notes__image {
@@ -254,6 +304,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 700ms var(--ease-smooth);
+}
+
+.desk-notes:hover .desk-notes__image img {
+    transform: scale(1.04);
 }
 
 .desk-notes__content {
@@ -324,6 +379,7 @@
     border: 1px solid var(--line-strong);
     background: var(--paper);
     box-shadow: var(--shadow-soft);
+    animation: modal-scroll-in 320ms var(--ease-smooth);
 }
 
 .modal__panel--compact {
@@ -374,6 +430,29 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 26px;
+}
+
+@keyframes board-restore-pulse {
+    0% { filter: brightness(1); }
+    40% { filter: brightness(1.06) saturate(1.06); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes tile-correct-settle {
+    0% { transform: scale(0.985); }
+    50% { transform: scale(1.018); }
+    100% { transform: scale(1); }
+}
+
+@keyframes board-complete-glow {
+    0% { box-shadow: inset 0 0 0 rgba(192, 60, 42, 0); }
+    45% { box-shadow: inset 0 0 42px rgba(192, 60, 42, 0.24); }
+    100% { box-shadow: inset 0 0 0 rgba(192, 60, 42, 0); }
+}
+
+@keyframes modal-scroll-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ── 响应式 ── */
