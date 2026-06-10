@@ -15,6 +15,9 @@
         // 跳过动画，直接显示正文
         intro.style.display = "none";
         mainScroll.style.display = "";
+        if (window.FeiyiPageEffects) {
+            window.FeiyiPageEffects.refresh(mainScroll);
+        }
         return;
     }
 
